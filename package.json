@@ -1,0 +1,13 @@
+{
+	"name": "doge-fs",
+	"description": "isomorphic filesystem methods",
+	"version": "0.1.0-1",
+	"main": "lib/index.js",
+	"author": "Prokop Schield",
+	"dependencies": {
+		"fix-buffer-in-browser": "^0.1.2",
+		"ps-std": "^0.1.49"
+	},
+	"keywords": [],
+	"license": "GPL-3.0-or-later"
+}
