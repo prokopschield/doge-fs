@@ -1,8 +1,12 @@
-import { Future, LazyFuture } from "ps-std";
+import { Future, LazyFuture, noop } from "ps-std";
 
 import { localStorage } from "./storage";
 
-const fs = Future.resolve(import("fs" as any));
+const fs = new Future<any>((resolve) => {
+	return resolve((globalThis as any).require("fs"));
+});
+
+const fsr = fs.catch(noop);
 
 export function read(filename: string): Future<string> {
 	return new LazyFuture<string>((resolve, reject) => {
@@ -17,7 +21,7 @@ export function read(filename: string): Future<string> {
 				}
 			);
 		}
-	}).await(fs);
+	}).await(fsr);
 }
 
 export function write(filename: string, data: string): Future<void> {
@@ -29,7 +33,7 @@ export function write(filename: string, data: string): Future<void> {
 				err ? reject(err) : resolve();
 			});
 		}
-	}).await(fs);
+	}).await(fsr);
 }
 
 export default { read, write };
