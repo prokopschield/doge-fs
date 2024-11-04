@@ -31,3 +31,5 @@ export function write(filename: string, data: string): Future<void> {
 		}
 	}).await(fs);
 }
+
+export default { read, write };
